@@ -19,3 +19,13 @@
 ```
 $ python test.py
 ```
+
+## Usage
+- 抓取全部地區資料
+
+```
+$ python rent591crawl.py
+```
+
+## Data
+- 資料欄位參考 `demo/region-24.csv`

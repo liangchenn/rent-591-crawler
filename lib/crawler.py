@@ -6,7 +6,6 @@ import arrow
 
 import pandas as pd
 from bs4 import BeautifulSoup
-from requests import exceptions
 
 
 class Rent591Crawler(requests.sessions.Session):
@@ -14,12 +13,12 @@ class Rent591Crawler(requests.sessions.Session):
     A Basic Rent 591 Crawler.
     ''' 
 
-    prefix = 'https://rent.591.com.tw'
-    api_prefix = 'https://rent.591.com.tw/home/search/rsList?is_format_data=1&is_new_list=1&type=1'
+    R591_URL = 'https://rent.591.com.tw'
+    R591_API = 'https://rent.591.com.tw/home/search/rsList?is_format_data=1&is_new_list=1&type=1'
 
     def __init__(self, region: str, datafolder: str = './data/'):
         super().__init__()
-        self.search_page_url = f"{self.prefix}/?regionid={region}" 
+        self.search_page_url = f"{self.R591_URL}/?regionid={region}" 
         self.region = region
         self.folder = datafolder
         self.token = None
@@ -83,7 +82,7 @@ class Rent591Crawler(requests.sessions.Session):
         '''
 
         try:
-            data_url = f"{self.api_prefix}&regionid={self.region}&firstRow={30*page}"
+            data_url = f"{self.R591_API}&regionid={self.region}&firstRow={30*page}"
             data_res = self.get(data_url, headers=self.headers)
 
         except requests.exceptions.RequestException as e:
@@ -121,7 +120,7 @@ class Rent591Crawler(requests.sessions.Session):
         if not os.path.exists(folder):
             os.makedirs(f"{folder}")
 
-        path = f"{folder}/{filename}.csv"
+        path = f"{folder}/{filename}"
         self.rawdata.to_csv(path)
 
         return 
