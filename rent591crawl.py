@@ -6,7 +6,7 @@ if __name__ == "__main__":
 
     from tqdm.auto import tqdm
 
-    regions = range(1, 2)
+    regions = range(1, 27)
     
     for region in tqdm(regions):
         worker = Rent591Crawler(region)

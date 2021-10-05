@@ -119,7 +119,7 @@ class Rent591Crawler(requests.sessions.Session):
         folder = self.folder + arrow.now().format('YYYYMMDD')
 
         if not os.path.exists(folder):
-            os.mkdir(f"./{folder}")
+            os.makedirs(f"{folder}")
 
         path = f"{folder}/{filename}.csv"
         self.rawdata.to_csv(path)
